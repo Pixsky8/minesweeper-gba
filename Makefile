@@ -23,7 +23,7 @@ include $(DEVKITARM)/gba_rules
 TARGET		:= $(notdir $(CURDIR))
 BUILD		:= build
 SOURCES	:= source source/platform
-SOURCES	+= graphics/sprites
+SOURCES	+= graphics/sprites graphics/backgrounds
 INCLUDES	:= include graphics
 DATA		:=
 MUSIC		:=

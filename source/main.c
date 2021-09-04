@@ -12,6 +12,7 @@ int main(void) {
     REG_DISPCNT = MODE_0 | BGMODE_0 | BGMODE_1 | ENABLE_OBJECTS | SP_MAPPING_1D;
 
     init_sprites();
+    init_backgrounds();
 
     while (1) {
         vblank_inter_wait();
