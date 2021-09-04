@@ -4,6 +4,7 @@ build/
 *.d
 *.gba
 *.elf
+*.sav
 
 # Editor
 *.swp

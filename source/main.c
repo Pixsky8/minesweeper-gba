@@ -1,3 +1,6 @@
+#include <string.h>
+
+#include "init.h"
 #include "platform/input.h"
 #include "platform/interrupts.h"
 #include "platform/video.h"
@@ -7,6 +10,8 @@ int main(void) {
     register_vblank_isr();
 
     REG_DISPCNT = MODE_0 | BGMODE_0 | BGMODE_1 | ENABLE_OBJECTS | SP_MAPPING_1D;
+
+    init_sprites();
 
     while (1) {
         vblank_inter_wait();
