@@ -1,0 +1,13 @@
+# Compiler
+build/
+*.o
+*.d
+*.gba
+*.elf
+
+# Editor
+*.swp
+.\#*
+\#*\#
+*~
+*.log
