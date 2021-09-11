@@ -12,3 +12,6 @@ build/
 \#*\#
 *~
 *.log
+
+# OS
+.DS_Store
