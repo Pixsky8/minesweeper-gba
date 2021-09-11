@@ -7,6 +7,8 @@
 #include "platform/types.h"
 
 //GBA Key definition
+#define KEYS (int *) 0x04000130
+
 #define KEY_A      1
 #define KEY_B      2
 #define KEY_SELECT 4
@@ -17,7 +19,6 @@
 #define KEY_DOWN   128
 #define KEY_R      256
 #define KEY_L      512
-#define KEYS       (int *) 0x04000130
 #define KEY_MASK   0x3FF
 
 //Input Buffers

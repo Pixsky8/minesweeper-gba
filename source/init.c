@@ -3,9 +3,17 @@
 #include "platform/video.h"
 
 #include "backgrounds/background.h"
+#include "platform/interrupts.h"
 #include "sprites/sprites.h"
 
 #define CHARACTER_BASE_BLOCK 0
+
+void init_screen(void) {
+    // Init VSync
+    register_vblank_isr();
+
+    REG_DISPCNT = MODE_0 | BGMODE_0 | BGMODE_1 | ENABLE_OBJECTS | SP_MAPPING_1D;
+}
 
 void init_sprites(void) {
     // Copy sprite palette
