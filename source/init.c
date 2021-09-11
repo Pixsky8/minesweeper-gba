@@ -1,12 +1,14 @@
 #include <string.h>
 
+#include "platform/interrupts.h"
 #include "platform/video.h"
 
 #include "backgrounds/background.h"
-#include "platform/interrupts.h"
+#include "maps/map.h"
 #include "sprites/sprites.h"
 
 #define CHARACTER_BASE_BLOCK 0
+#define SCREEN_BASE_BLOCK    28
 
 void init_screen(void) {
     // Init VSync
@@ -33,4 +35,16 @@ void init_backgrounds(void) {
     memcpy(&TILE_MEM[CHARACTER_BASE_BLOCK][0],
            backgroundTiles,
            backgroundTilesLen);
+
+    // Copy background map
+    memcpy(&SE_MEM[SCREEN_BASE_BLOCK][0], blankMap, blankMapLen);
+
+    // Update bg info
+    REG_BGCNT[0] = bg_control(1,
+                              CHARACTER_BASE_BLOCK,
+                              BG_NO_MOSAIC,
+                              BG_8BPP,
+                              SCREEN_BASE_BLOCK,
+                              BG_NO_WRAP,
+                              BG_REG_32x32);
 }

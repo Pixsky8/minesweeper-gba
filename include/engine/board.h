@@ -1,9 +1,11 @@
 #ifndef ENGINE_BOARD_H
 #define ENGINE_BOARD_H
 
+#include "tools/basic_matrix.h"
+
+// This enum matches the sprite sheet
 enum BOARD_TYPE {
     EMPTY = 0,
-    BOMB = -1,
     ONE_BOMB = 1,
     TWO_BOMB = 2,
     THREE_BOMB = 3,
@@ -12,12 +14,9 @@ enum BOARD_TYPE {
     SIX_BOMB = 6,
     SEVEN_BOMB = 7,
     EIGHT_BOMB = 8,
+    BOMB = 10,
 };
 
-#define MATRIX_NAME matrix_board
-#define MATRIX_TYPE char
-#include "tools/matrix.h"
-#undef MATRIX_NAME
-#undef MATRIX_TYPE
+void setup_board(void);
 
 #endif
