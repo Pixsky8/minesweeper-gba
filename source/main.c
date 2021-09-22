@@ -1,12 +1,13 @@
 #include <string.h>
 
+#include "engine/logic.h"
 #include "init.h"
 #include "platform/input.h"
 #include "platform/interrupts.h"
 #include "platform/video.h"
-#include "engine/logic.h"
 
 #include "engine/board.h"
+#include "engine/renderer.h"
 
 int main(void) {
     init_screen();
@@ -15,7 +16,7 @@ int main(void) {
     init_game();
 
     for (int i = 1; i <= 8; i++) {
-        update_square(i - 1, 0, i);
+        reveal_square(i - 1, 0, i);
     }
 
     while (1) {

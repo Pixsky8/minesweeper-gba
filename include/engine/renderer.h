@@ -3,6 +3,9 @@
 
 #include "engine/board.h"
 
-void update_square(int x, int y, enum BOARD_TYPE new_type);
+/**
+ * @brief Display new_type sprite on the screen at specified location
+ */
+void reveal_square(int x, int y, enum BOARD_TYPE new_type);
 
 #endif

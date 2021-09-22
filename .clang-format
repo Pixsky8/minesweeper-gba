@@ -1,5 +1,6 @@
-﻿---
+---
 BasedOnStyle: LLVM
+AccessModifierOffset: -4
 AlignAfterOpenBracket: Align
 AlignConsecutiveMacros: 'true'
 AlignConsecutiveAssignments: 'false'
@@ -12,7 +13,7 @@ AllowAllConstructorInitializersOnNextLine: 'true'
 AllowAllParametersOfDeclarationOnNextLine: 'false'
 AllowShortBlocksOnASingleLine: 'false'
 AllowShortCaseLabelsOnASingleLine: 'false'
-AllowShortFunctionsOnASingleLine: None
+AllowShortFunctionsOnASingleLine: Empty
 AllowShortIfStatementsOnASingleLine: Never
 AllowShortLambdasOnASingleLine: None
 AllowShortLoopsOnASingleLine: 'false'
@@ -48,7 +49,7 @@ ColumnLimit: '80'
 CompactNamespaces: 'false'
 ConstructorInitializerAllOnOneLineOrOnePerLine: 'false'
 ConstructorInitializerIndentWidth: '4'
-Cpp11BracedListStyle: 'true'
+Cpp11BracedListStyle: 'false'
 DerivePointerAlignment: 'false'
 FixNamespaceComments: 'true'
 IncludeBlocks: Preserve
@@ -58,16 +59,16 @@ IndentWidth: '4'
 IndentWrappedFunctionNames: 'false'
 JavaScriptQuotes: Single
 JavaScriptWrapImports: 'true'
-KeepEmptyLinesAtTheStartOfBlocks: 'false'
+KeepEmptyLinesAtTheStartOfBlocks: 'true'
 Language: Cpp
-NamespaceIndentation: All
+NamespaceIndentation: Inner
 ReflowComments: 'false'
 SortIncludes: 'true'
 SpaceAfterCStyleCast: 'true'
 SpaceAfterLogicalNot: 'false'
 SpaceAfterTemplateKeyword: 'false'
 SpaceBeforeAssignmentOperators: 'true'
-SpaceBeforeCpp11BracedList: 'false'
+SpaceBeforeCpp11BracedList: 'true'
 SpaceBeforeParens: ControlStatements
 SpaceBeforeRangeBasedForLoopColon: 'true'
 SpaceInEmptyParentheses: 'false'

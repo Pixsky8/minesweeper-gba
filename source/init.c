@@ -5,8 +5,8 @@
 
 #include "backgrounds/background.h"
 #include "maps/map.h"
-#include "sprites/sprites.h"
 #include "platform/video.h"
+#include "sprites/sprites.h"
 
 #define CHARACTER_BASE_BLOCK 0
 #define SCREEN_BASE_BLOCK    28
@@ -27,7 +27,12 @@ void init_sprites(void) {
 
     obj_buff_init();
     for (int i = 0; i < OBJ_BUFF_SIZE; i++) {
-        obj_buffer[i].attr0 = set_obj_attr0(0, ATTR0_HIDE, ATTR0_GFX_NOR, ATTR0_NO_MOSAIC, ATTR0_8BPP, ATTR0_SQUARE);
+        obj_buffer[i].attr0 = set_obj_attr0(0,
+                                            ATTR0_HIDE,
+                                            ATTR0_GFX_NOR,
+                                            ATTR0_NO_MOSAIC,
+                                            ATTR0_8BPP,
+                                            ATTR0_SQUARE);
         sprite_set_x(i, 0);
     }
 }

@@ -6,7 +6,7 @@
 #define SCREEN_BASE_BLOCK 28
 #define BG_REVEALED       2
 
-void update_square(int x, int y, enum BOARD_TYPE new_type) {
+void reveal_square(int x, int y, enum BOARD_TYPE new_type) {
     unsigned int sprite_id = x + y * game_board_side;
     unsigned int sprite_tile = (new_type - 1) << 1;
 
