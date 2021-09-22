@@ -13,4 +13,10 @@
 #undef MATRIX_NAME
 #undef MATRIX_TYPE
 
+#define MATRIX_NAME matrix_ushort
+#define MATRIX_TYPE unsigned short
+#include "tools/matrix.h"
+#undef MATRIX_NAME
+#undef MATRIX_TYPE
+
 #endif
