@@ -7,6 +7,8 @@
 #include "maps/map.h"
 #include "platform/video.h"
 #include "sprites/sprites.h"
+#include "global.h"
+#include "engine/renderer.h"
 
 #define CHARACTER_BASE_BLOCK 0
 #define SCREEN_BASE_BLOCK    28
@@ -26,6 +28,8 @@ void init_sprites(void) {
     memcpy(&TILE8_MEM[4][0], spritesTiles, spritesTilesLen);
 
     obj_buff_init();
+    int x = 0;
+    int y = 0;
     for (int i = 0; i < OBJ_BUFF_SIZE; i++) {
         obj_buffer[i].attr0 = set_obj_attr0(0,
                                             ATTR0_HIDE,
@@ -33,7 +37,14 @@ void init_sprites(void) {
                                             ATTR0_NO_MOSAIC,
                                             ATTR0_8BPP,
                                             ATTR0_SQUARE);
-        sprite_set_x(i, 0);
+        sprite_set_x(i, x * 8);
+        sprite_set_y(i, y * 8);
+
+        x++;
+        if (x == MAX_SQUARE_SIDE) {
+            x = 0;
+            y++;
+        }
     }
 }
 

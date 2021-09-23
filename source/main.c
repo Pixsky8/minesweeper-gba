@@ -6,6 +6,8 @@
 #include "platform/interrupts.h"
 #include "platform/video.h"
 
+// TMP include
+#include <stddef.h>
 #include "engine/board.h"
 #include "engine/renderer.h"
 
@@ -18,6 +20,8 @@ int main(void) {
     for (int i = 1; i <= 8; i++) {
         reveal_square(i - 1, 0, i);
     }
+
+    flag_square(8, 0, true);
 
     while (1) {
         refresh_input_buffers();

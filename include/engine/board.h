@@ -17,6 +17,12 @@ enum BOARD_TYPE {
     BOMB = 10,
 };
 
+enum BOARD_DISPLAY_TYPE {
+    HIDDEN = 0,
+    REVEALED = 1,
+    FLAGGED = 2,
+};
+
 void setup_board(void);
 
 #endif
