@@ -3,7 +3,7 @@
 #include "platform/interrupts.h"
 #include "platform/video.h"
 
-#include "backgrounds/background.h"
+#include "backgrounds/unified.h"
 #include "maps/map.h"
 #include "platform/video.h"
 #include "sprites/sprites.h"
@@ -11,13 +11,12 @@
 #include "engine/renderer.h"
 
 #define CHARACTER_BASE_BLOCK 0
-#define SCREEN_BASE_BLOCK    28
 
 void init_screen(void) {
     // Init VSync
     register_vblank_isr();
 
-    REG_DISPCNT = MODE_0 | BGMODE_0 | BGMODE_1 | ENABLE_OBJECTS | SP_MAPPING_1D;
+    REG_DISPCNT = MODE_0 | ENABLE_BG_0 | ENABLE_BG_1 | ENABLE_BG_2 | ENABLE_OBJECTS | SP_MAPPING_1D;
 }
 
 void init_sprites(void) {
@@ -28,44 +27,44 @@ void init_sprites(void) {
     memcpy(&TILE8_MEM[4][0], spritesTiles, spritesTilesLen);
 
     obj_buff_init();
-    int x = 0;
-    int y = 0;
-    for (int i = 0; i < OBJ_BUFF_SIZE; i++) {
-        obj_buffer[i].attr0 = set_obj_attr0(0,
-                                            ATTR0_HIDE,
-                                            ATTR0_GFX_NOR,
-                                            ATTR0_NO_MOSAIC,
-                                            ATTR0_8BPP,
-                                            ATTR0_SQUARE);
-        sprite_set_x(i, x * 8);
-        sprite_set_y(i, y * 8);
-
-        x++;
-        if (x == MAX_SQUARE_SIDE) {
-            x = 0;
-            y++;
-        }
-    }
 }
 
 void init_backgrounds(void) {
     // Copy background palette
-    memcpy(PAL_BG, backgroundPal, backgroundPalLen);
+    memcpy(PAL_BG, unifiedPal, unifiedPalLen);
 
     // Copy background tiles
     memcpy(&TILE_MEM[CHARACTER_BASE_BLOCK][0],
-           backgroundTiles,
-           backgroundTilesLen);
+           unifiedTiles,
+           unifiedTilesLen);
 
     // Copy background map
     memcpy(&SE_MEM[SCREEN_BASE_BLOCK][0], blankMap, blankMapLen);
 
     // Update bg info
-    REG_BGCNT[0] = bg_control(1,
+    REG_BGCNT[0] = bg_control(2,
                               CHARACTER_BASE_BLOCK,
                               BG_NO_MOSAIC,
                               BG_8BPP,
                               SCREEN_BASE_BLOCK,
+                              BG_NO_WRAP,
+                              BG_REG_32x32);
+
+    // Square borders
+    REG_BGCNT[1] = bg_control(1,
+                              CHARACTER_BASE_BLOCK,
+                              BG_NO_MOSAIC,
+                              BG_8BPP,
+                              SCREEN_BORDER_BLOCK,
+                              BG_NO_WRAP,
+                              BG_REG_32x32);
+
+    // Square information (flag, adj bombs, etc.)
+    REG_BGCNT[2] = bg_control(0,
+                              CHARACTER_BASE_BLOCK,
+                              BG_NO_MOSAIC,
+                              BG_8BPP,
+                              SCREEN_INFO_BLOCK,
                               BG_NO_WRAP,
                               BG_REG_32x32);
 }

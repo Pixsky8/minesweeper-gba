@@ -5,6 +5,10 @@
 
 #define MAX_SQUARE_SIDE 32
 
+#define SCREEN_BASE_BLOCK 28
+#define SCREEN_BORDER_BLOCK  29
+#define SCREEN_INFO_BLOCK    30
+
 /**
  * @brief Display new_type sprite on the screen at specified location
  */

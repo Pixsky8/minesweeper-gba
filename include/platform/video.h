@@ -20,10 +20,10 @@
 #define MODE_4 0x0004 // Bitmap 240x160, 8bpp, page-flip
 #define MODE_5 0x0005 // Bitmap 160x128, 16bpp, page-flip
 
-#define BGMODE_0 0x0100 // Enable BG 0
-#define BGMODE_1 0x0200 // Enable BG 1
-#define BGMODE_2 0x0400 // Enable BG 2
-#define BGMODE_3 0x0800 // Enable BG 3
+#define ENABLE_BG_0 0x0100 // Enable BG 0
+#define ENABLE_BG_1 0x0200 // Enable BG 1
+#define ENABLE_BG_2 0x0400 // Enable BG 2
+#define ENABLE_BG_3 0x0800 // Enable BG 3
 
 #define NB_BG 4
 
@@ -55,7 +55,7 @@ typedef u16 SCREENBLOCK[1024];
 // === Background registers ===
 // Primary control registers; use REG_BGCNT[i] i:0-3
 #define REG_BGCNT ((v_u16 *) 0x04000008)
-// Scrolling registers; use REG_BG_OFF[i] i:0-3; /!\ read only
+// Scrolling registers; use REG_BG_OFF[i] i:0-3; /!\ write only
 #define REG_BG_OFF ((BG_OFFSET *) 0x04000010)
 // === Conrol register macros ===
 // bg_mosaic
@@ -64,7 +64,7 @@ typedef u16 SCREENBLOCK[1024];
 // bg_color_mode
 #define BG_4BPP 0
 #define BG_8BPP 0x0080
-// bg_affine_wrapping
+// bg_affine_wrapping (Only useful for affine backgrounds)
 #define BG_NO_WRAP 0
 #define BG_WRAP    0x2000
 // bg_size
@@ -213,7 +213,16 @@ void obj_buff_to_oam(u16 size);
 */
 void obj_to_oam(u16 i);
 
-// Background Functions
+/**
+** @brief Change the background's properties
+** @param priority Lower number is on top (0...3)
+** @param character_base_block Tileset used by the background (0...3)
+** @param bg_mosaic Enable/Disable mosaic effect (BG_NO_MOSAIC or BG_MOSAIC)
+** @param bg_color_mode Set the color mode of the background (BG_8BPP or BG_4BPP)
+** @param sceen_base_block Tilemap used by the background (0...31)
+** @param bg_affine_wrapping Wraps if bg is affine (BG_WRAP or BG_NO_WRAP)
+** @param bg_size Dimensions of the bg (BG_REG_iixii or BG_AFF_iixii)
+*/
 u16 bg_control(u16 priority,
                u16 character_base_block,
                u16 bg_mosaic,
