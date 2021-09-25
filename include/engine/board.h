@@ -3,6 +3,8 @@
 
 #include "tools/basic_matrix.h"
 
+#define MAX_SQUARE_SIDE 32
+
 // This enum matches the sprite sheet
 enum BOARD_TYPE {
     EMPTY = 0,

@@ -7,9 +7,9 @@
 #include "platform/video.h"
 
 // TMP include
-#include <stddef.h>
 #include "engine/board.h"
 #include "engine/renderer.h"
+#include <stddef.h>
 
 int main(void) {
     init_screen();
@@ -26,7 +26,7 @@ int main(void) {
     while (1) {
         refresh_input_buffers();
 
-        // TODO: Game logic
+        update();
 
         obj_buff_to_oam(OBJ_BUFF_SIZE);
         vblank_inter_wait();

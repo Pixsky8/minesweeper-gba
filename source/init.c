@@ -4,11 +4,11 @@
 #include "platform/video.h"
 
 #include "backgrounds/unified.h"
+#include "engine/renderer.h"
+#include "global.h"
 #include "maps/map.h"
 #include "platform/video.h"
 #include "sprites/sprites.h"
-#include "global.h"
-#include "engine/renderer.h"
 
 #define CHARACTER_BASE_BLOCK 0
 
@@ -16,7 +16,8 @@ void init_screen(void) {
     // Init VSync
     register_vblank_isr();
 
-    REG_DISPCNT = MODE_0 | ENABLE_BG_0 | ENABLE_BG_1 | ENABLE_BG_2 | ENABLE_OBJECTS | SP_MAPPING_1D;
+    REG_DISPCNT = MODE_0 | ENABLE_BG_0 | ENABLE_BG_1 | ENABLE_BG_2 |
+                  ENABLE_OBJECTS | SP_MAPPING_1D;
 }
 
 void init_sprites(void) {
@@ -34,9 +35,7 @@ void init_backgrounds(void) {
     memcpy(PAL_BG, unifiedPal, unifiedPalLen);
 
     // Copy background tiles
-    memcpy(&TILE_MEM[CHARACTER_BASE_BLOCK][0],
-           unifiedTiles,
-           unifiedTilesLen);
+    memcpy(&TILE_MEM[CHARACTER_BASE_BLOCK][0], unifiedTiles, unifiedTilesLen);
 
     // Copy background map
     memcpy(&SE_MEM[SCREEN_BASE_BLOCK][0], blankMap, blankMapLen);
