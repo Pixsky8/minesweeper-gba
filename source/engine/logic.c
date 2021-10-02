@@ -10,7 +10,7 @@ void init_game(void) {
     init_renderer();
 }
 
-static void input_update(void) {
+static void cursor_update(void) {
     if (key_positive_edge(KEY_UP)) {
         if (cursor_y > 0)
             cursor_y--;
@@ -33,5 +33,5 @@ static void input_update(void) {
 }
 
 void update(void) {
-    input_update();
+    cursor_update();
 }
