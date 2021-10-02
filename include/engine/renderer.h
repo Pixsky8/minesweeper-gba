@@ -24,6 +24,12 @@ void reveal_square(int x, int y, enum BOARD_TYPE new_type);
  */
 void flag_square(int x, int y, bool put_flag);
 
+/**
+ * @brief Change the cursor's sprite to the location (screen coords)
+ *
+ * The sprite index is defined by CURSOR_SPRITE_INDEX
+ * X & Y are usually bitshifted to the left 3 times
+ */
 void set_cursor_position(s16 x, s16 y);
 
 #endif
