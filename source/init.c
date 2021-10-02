@@ -6,9 +6,9 @@
 #include "backgrounds/unified.h"
 #include "engine/renderer.h"
 #include "global.h"
-#include "maps/map.h"
 #include "platform/video.h"
 #include "sprites/sprites.h"
+#include "tools/memory.h"
 
 #define CHARACTER_BASE_BLOCK 0
 
@@ -38,7 +38,7 @@ void init_backgrounds(void) {
     memcpy(&TILE_MEM[CHARACTER_BASE_BLOCK][0], unifiedTiles, unifiedTilesLen);
 
     // Copy background map
-    memcpy(&SE_MEM[SCREEN_BASE_BLOCK][0], blankMap, blankMapLen);
+    short_memset(&SE_MEM[SCREEN_BASE_BLOCK][0], 1, 1024);
 
     // Update bg info
     REG_BGCNT[0] = bg_control(2,

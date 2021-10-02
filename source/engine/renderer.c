@@ -1,8 +1,11 @@
-#include "engine/renderer.h"
+#include <string.h>
+
 #include "engine/board.h"
+#include "engine/renderer.h"
 #include "global.h"
 #include "platform/video.h"
 #include "tools/basic_matrix.h"
+#include "tools/memory.h"
 
 #define BG_REVEALED           2
 #define NUMBER_SPRITE_OFFSET  16
@@ -19,6 +22,10 @@ void init_renderer(void) {
     obj_buffer[CURSOR_SPRITE_INDEX].attr1 = set_obj_attr1(0, 0, 0, ATTR1_M);
     obj_buffer[CURSOR_SPRITE_INDEX].attr2 =
         set_obj_attr2(CURSOR_SPRITE_TILE_ID, 0, 0);
+}
+
+void reset_board_render(void) {
+    short_memset(&SE_MEM[SCREEN_BASE_BLOCK][0], 1, 1024);
 }
 
 void reveal_square(int x, int y, enum BOARD_TYPE new_type) {
