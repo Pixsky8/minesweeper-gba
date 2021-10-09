@@ -1,3 +1,5 @@
+#include <stdbool.h>
+
 #include "platform/input.h"
 #include "platform/types.h"
 
@@ -12,26 +14,29 @@ void init_game(void) {
 
 static void cursor_update(void) {
     if (key_positive_edge(KEY_UP)) {
-        if (cursor_y > 0)
-            cursor_y--;
+        if (g_cursor_y > 0)
+            g_cursor_y--;
     }
     else if (key_positive_edge(KEY_DOWN)) {
-        if (cursor_y < MAX_SQUARE_SIDE) // TODO Fix this value
-            cursor_y++;
+        if (g_cursor_y < MAX_SQUARE_SIDE) // TODO Fix this value
+            g_cursor_y++;
     }
 
     if (key_positive_edge(KEY_LEFT)) {
-        if (cursor_x > 0)
-            cursor_x--;
+        if (g_cursor_x > 0)
+            g_cursor_x--;
     }
     else if (key_positive_edge(KEY_RIGHT)) {
-        if (cursor_x < MAX_SQUARE_SIDE) // TODO Fix this value
-            cursor_x++;
+        if (g_cursor_x < MAX_SQUARE_SIDE) // TODO Fix this value
+            g_cursor_x++;
     }
 
-    set_cursor_position(cursor_x << 3, cursor_y << 3);
+    set_cursor_position(g_cursor_x << 3, g_cursor_y << 3);
 }
 
 void update(void) {
     cursor_update();
+
+    if (key_positive_edge(KEY_A))
+        reveal_square(g_cursor_x, g_cursor_y);
 }

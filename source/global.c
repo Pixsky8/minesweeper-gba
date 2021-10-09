@@ -1,8 +1,9 @@
 #include "global.h"
 
-char board[BOARD_SIZE] = { 0 };
+char g_board[BOARD_SIZE] = { 0 };
 
-int game_board_side = 4;
+// This value has to be inferior or equal to 8
+int g_game_board_side = 16;
 
-int cursor_x = 0;
-int cursor_y = 0;
+int g_cursor_x = 0;
+int g_cursor_y = 0;

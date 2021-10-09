@@ -28,7 +28,7 @@ void reset_board_render(void) {
     short_memset(&SE_MEM[SCREEN_BASE_BLOCK][0], 1, 1024);
 }
 
-void reveal_square(int x, int y, enum BOARD_TYPE new_type) {
+void display_square(int x, int y, enum BOARD_TYPE new_type) {
     unsigned int bg_id = x + y * MAX_SQUARE_SIDE;
     unsigned int bg_tile = NUMBER_SPRITE_OFFSET + (new_type - 1);
 

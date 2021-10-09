@@ -17,7 +17,7 @@ void init_renderer(void);
 /**
  * @brief Display new_type sprite on the screen at specified location
  */
-void reveal_square(int x, int y, enum BOARD_TYPE new_type);
+void display_square(int x, int y, enum BOARD_TYPE new_type);
 
 /**
  * @brief Put a flag on the tile
