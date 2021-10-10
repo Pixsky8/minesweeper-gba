@@ -19,7 +19,7 @@ void init_renderer(void) {
                                                           ATTR0_NO_MOSAIC,
                                                           ATTR0_8BPP,
                                                           ATTR0_SQUARE);
-    obj_buffer[CURSOR_SPRITE_INDEX].attr1 = set_obj_attr1(0, 0, 0, ATTR1_M);
+    obj_buffer[CURSOR_SPRITE_INDEX].attr1 = set_obj_attr1(0, 0, 0, ATTR1_S);
     obj_buffer[CURSOR_SPRITE_INDEX].attr2 =
         set_obj_attr2(CURSOR_SPRITE_TILE_ID, 0, 0);
 }
@@ -36,7 +36,16 @@ void display_square(int x, int y, enum BOARD_TYPE new_type) {
     SE_MEM[SCREEN_INFO_BLOCK][bg_id] = bg_tile;
 }
 
+bool is_revealed(int x, int y) {
+    unsigned int bg_id = x + y * MAX_SQUARE_SIDE;
+
+    return SE_MEM[SCREEN_BASE_BLOCK][bg_id] == BG_REVEALED;
+}
+
 void flag_square(int x, int y, bool put_flag) {
+    if (is_revealed(x, y))
+        return;
+
     unsigned int bg_id = x + y * MAX_SQUARE_SIDE;
 
     if (put_flag)

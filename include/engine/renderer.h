@@ -20,6 +20,11 @@ void init_renderer(void);
 void display_square(int x, int y, enum BOARD_TYPE new_type);
 
 /**
+ * @brief Check if a square has already been revealed
+ */
+bool is_revealed(int x, int y);
+
+/**
  * @brief Put a flag on the tile
  */
 void flag_square(int x, int y, bool put_flag);

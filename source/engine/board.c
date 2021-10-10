@@ -1,15 +1,18 @@
 #include "engine/board.h"
 
-#include <string.h>
 #include <stdbool.h>
+#include <string.h>
 
-#include "global.h"
 #include "engine/renderer.h"
+#include "global.h"
 
 void setup_board(void) {
     memset(&g_board, 0, BOARD_SIZE);
 
-    matrix_char_set(g_board, 0, 0, BOARD_WIDTH, BOMB);
+    matrix_char_set(g_board, 0, 0, g_game_board_side, BOMB);
+    matrix_char_set(g_board, 0, 1, g_game_board_side, ONE_BOMB);
+    matrix_char_set(g_board, 1, 0, g_game_board_side, ONE_BOMB);
+    matrix_char_set(g_board, 1, 1, g_game_board_side, ONE_BOMB);
 }
 
 static inline enum BOARD_TYPE get_square(int x, int y) {
@@ -21,12 +24,22 @@ static inline enum BOARD_TYPE get_square(int x, int y) {
 }
 
 bool reveal_square(int x, int y) {
+    if (is_revealed(x, y))
+        return false;
+
     enum BOARD_TYPE revealed = get_square(x, y);
 
     if (revealed == OUT_OF_BOUND)
         return false;
 
     display_square(x, y, revealed);
+
+    if (revealed == NO_BOMB) {
+        reveal_square(x - 1, y);
+        reveal_square(x + 1, y);
+        reveal_square(x, y - 1);
+        reveal_square(x, y + 1);
+    }
 
     if (revealed == BOMB)
         return true;
