@@ -6,11 +6,6 @@
 #include "platform/interrupts.h"
 #include "platform/video.h"
 
-// TMP include
-#include "engine/board.h"
-#include "engine/renderer.h"
-#include <stddef.h>
-
 int main(void) {
     init_screen();
     init_sprites();
