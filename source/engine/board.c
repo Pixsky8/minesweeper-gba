@@ -23,6 +23,19 @@ static inline enum BOARD_TYPE get_square(int x, int y) {
     return matrix_char_get(g_board, x, y, g_game_board_side);
 }
 
+bool can_reveal_square(int x, int y) {
+    if (is_revealed(x, y))
+        return false;
+
+    if (get_square(x, y) == OUT_OF_BOUND)
+        return false;
+
+    if (is_flagged(x, y))
+        return false;
+
+    return true;
+}
+
 bool reveal_square(int x, int y) {
     if (is_revealed(x, y))
         return false;
@@ -45,4 +58,12 @@ bool reveal_square(int x, int y) {
         return true;
 
     return false;
+}
+
+void toggle_flag_square(int x, int y) {
+    if (is_revealed(x, y))
+        return;
+
+    bool should_put_flag = !is_flagged(x, y);
+    display_flag_square(x, y, should_put_flag);
 }

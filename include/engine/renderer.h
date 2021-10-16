@@ -25,9 +25,14 @@ void display_square(int x, int y, enum BOARD_TYPE new_type);
 bool is_revealed(int x, int y);
 
 /**
- * @brief Put a flag on the tile
+ * @brief Check if a square is a flag
  */
-void flag_square(int x, int y, bool put_flag);
+bool is_flagged(int x, int y);
+
+/**
+ * @brief Display a flag on the screen
+ */
+void display_flag_square(int x, int y, bool put_flag);
 
 /**
  * @brief Change the cursor's sprite to the location (screen coords)

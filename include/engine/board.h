@@ -19,6 +19,7 @@ enum BOARD_TYPE {
     SIX_BOMB = 6,
     SEVEN_BOMB = 7,
     EIGHT_BOMB = 8,
+    FLAG = 9,
     BOMB = 10,
 };
 
@@ -30,10 +31,14 @@ enum BOARD_DISPLAY_TYPE {
 
 void setup_board(void);
 
+bool can_reveal_square(int x, int y);
+
 /**
  * @brief Reveal a square
  * @return True if there is a bomb at the location
  */
 bool reveal_square(int x, int y);
+
+void toggle_flag_square(int x, int y);
 
 #endif

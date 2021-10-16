@@ -37,6 +37,9 @@ static void cursor_update(void) {
 void update(void) {
     cursor_update();
 
-    if (key_positive_edge(KEY_A))
+    if (key_positive_edge(KEY_A) && can_reveal_square(g_cursor_x, g_cursor_y))
         reveal_square(g_cursor_x, g_cursor_y);
+
+    else if (key_positive_edge(KEY_B))
+        toggle_flag_square(g_cursor_x, g_cursor_y);
 }

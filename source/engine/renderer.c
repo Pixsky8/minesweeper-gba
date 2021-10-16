@@ -30,7 +30,7 @@ void reset_board_render(void) {
 
 void display_square(int x, int y, enum BOARD_TYPE new_type) {
     unsigned int bg_id = x + y * MAX_SQUARE_SIDE;
-    unsigned int bg_tile = NUMBER_SPRITE_OFFSET + (new_type - 1);
+    unsigned int bg_tile = NUMBER_SPRITE_OFFSET + new_type - 1;
 
     SE_MEM[SCREEN_BASE_BLOCK][bg_id] = BG_REVEALED;
     SE_MEM[SCREEN_INFO_BLOCK][bg_id] = bg_tile;
@@ -42,10 +42,13 @@ bool is_revealed(int x, int y) {
     return SE_MEM[SCREEN_BASE_BLOCK][bg_id] == BG_REVEALED;
 }
 
-void flag_square(int x, int y, bool put_flag) {
-    if (is_revealed(x, y))
-        return;
+bool is_flagged(int x, int y) {
+    unsigned int bg_id = x + y * MAX_SQUARE_SIDE;
 
+    return SE_MEM[SCREEN_INFO_BLOCK][bg_id] == FLAG_TILE_ID;
+}
+
+void display_flag_square(int x, int y, bool put_flag) {
     unsigned int bg_id = x + y * MAX_SQUARE_SIDE;
 
     if (put_flag)
