@@ -5,15 +5,7 @@
 
 #include "engine/renderer.h"
 #include "global.h"
-
-void setup_board(void) {
-    memset(&g_board, 0, BOARD_SIZE);
-
-    matrix_char_set(g_board, 0, 0, g_game_board_side, BOMB);
-    matrix_char_set(g_board, 0, 1, g_game_board_side, ONE_BOMB);
-    matrix_char_set(g_board, 1, 0, g_game_board_side, ONE_BOMB);
-    matrix_char_set(g_board, 1, 1, g_game_board_side, ONE_BOMB);
-}
+#include "tools/rng.h"
 
 static inline enum BOARD_TYPE get_square(int x, int y) {
     if (x < 0 || x >= g_game_board_side)
@@ -21,6 +13,42 @@ static inline enum BOARD_TYPE get_square(int x, int y) {
     if (y < 0 || y >= g_game_board_side)
         return OUT_OF_BOUND;
     return matrix_char_get(g_board, x, y, g_game_board_side);
+}
+
+void plant_bomb(int x, int y) {
+    matrix_char_set(g_board, x, y, g_game_board_side, BOMB);
+
+    for (int curr_x = -1; curr_x <= 1; curr_x++) {
+        for (int curr_y = -1; curr_y <= 1; curr_y++) {
+            if (curr_x == 0 && curr_y == 0)
+                continue;
+
+            enum BOARD_TYPE curr = get_square(x + curr_x, y + curr_y);
+
+            if (curr == BOMB || curr == OUT_OF_BOUND)
+                continue;
+
+            matrix_char_set(g_board,
+                            x + curr_x,
+                            y + curr_y,
+                            g_game_board_side,
+                            curr + 1);
+        }
+    }
+}
+
+void setup_board(void) {
+    memset(&g_board, 0, BOARD_SIZE);
+
+    random();
+    random();
+    random();
+    random();
+
+    int x = ((unsigned) random()) % g_game_board_side;
+    int y = ((unsigned) random()) % g_game_board_side;
+
+    plant_bomb(x, y);
 }
 
 bool can_reveal_square(int x, int y) {
