@@ -45,10 +45,12 @@ void setup_board(void) {
     random();
     random();
 
-    int x = ((unsigned) random()) % g_game_board_side;
-    int y = ((unsigned) random()) % g_game_board_side;
+    for (int i = 0; i < g_bomb_number; i++) {
+        int x = ((unsigned) random()) % g_game_board_side;
+        int y = ((unsigned) random()) % g_game_board_side;
 
-    plant_bomb(x, y);
+        plant_bomb(x, y);
+    }
 }
 
 bool can_reveal_square(int x, int y) {
@@ -80,6 +82,10 @@ bool reveal_square(int x, int y) {
         reveal_square(x + 1, y);
         reveal_square(x, y - 1);
         reveal_square(x, y + 1);
+        reveal_square(x + 1, y + 1);
+        reveal_square(x + 1, y - 1);
+        reveal_square(x - 1, y + 1);
+        reveal_square(x - 1, y - 1);
     }
 
     if (revealed == BOMB)

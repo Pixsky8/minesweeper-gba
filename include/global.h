@@ -7,6 +7,7 @@
 extern char g_board[BOARD_SIZE];
 
 extern int g_game_board_side;
+extern int g_bomb_number;
 
 extern int g_cursor_x, g_cursor_y;
 
