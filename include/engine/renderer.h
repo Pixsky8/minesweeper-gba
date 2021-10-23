@@ -13,6 +13,7 @@
 #define CURSOR_SPRITE_INDEX 0
 
 void init_renderer(void);
+void close_renderer(void);
 
 /**
  * @brief Display new_type sprite on the screen at specified location

@@ -3,6 +3,6 @@
 
 void init_game(void);
 
-void update(void);
+void game_update(void);
 
 #endif

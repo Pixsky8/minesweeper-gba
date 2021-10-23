@@ -9,3 +9,5 @@ int g_bomb_number = 20;
 
 int g_cursor_x = 0;
 int g_cursor_y = 0;
+
+enum GAME_STATE g_game_state = MAIN_MENU;

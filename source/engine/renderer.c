@@ -13,15 +13,50 @@
 #define CURSOR_SPRITE_TILE_ID 22
 
 void init_renderer(void) {
-    obj_buffer[CURSOR_SPRITE_INDEX].attr0 = set_obj_attr0(0,
+    obj_buffer[CURSOR_SPRITE_INDEX].attr0 = set_obj_attr0(g_cursor_y,
                                                           ATTR0_NOR,
                                                           ATTR0_GFX_NOR,
                                                           ATTR0_NO_MOSAIC,
                                                           ATTR0_8BPP,
                                                           ATTR0_SQUARE);
-    obj_buffer[CURSOR_SPRITE_INDEX].attr1 = set_obj_attr1(0, 0, 0, ATTR1_S);
+    obj_buffer[CURSOR_SPRITE_INDEX].attr1 =
+        set_obj_attr1(g_cursor_x, 0, 0, ATTR1_S);
     obj_buffer[CURSOR_SPRITE_INDEX].attr2 =
         set_obj_attr2(CURSOR_SPRITE_TILE_ID, 0, 0);
+
+    // Set background map
+    short_memset(&SE_MEM[SCREEN_BASE_BLOCK][0], 1, 1024);
+
+    // Update bg info
+    REG_BGCNT[0] = bg_control(2,
+                              CHARACTER_BASE_BLOCK,
+                              BG_NO_MOSAIC,
+                              BG_8BPP,
+                              SCREEN_BASE_BLOCK,
+                              BG_NO_WRAP,
+                              BG_REG_32x32);
+
+    // Square borders
+    REG_BGCNT[1] = bg_control(1,
+                              CHARACTER_BASE_BLOCK,
+                              BG_NO_MOSAIC,
+                              BG_8BPP,
+                              SCREEN_BORDER_BLOCK,
+                              BG_NO_WRAP,
+                              BG_REG_32x32);
+
+    // Square information (flag, adj bombs, etc.)
+    REG_BGCNT[2] = bg_control(0,
+                              CHARACTER_BASE_BLOCK,
+                              BG_NO_MOSAIC,
+                              BG_8BPP,
+                              SCREEN_INFO_BLOCK,
+                              BG_NO_WRAP,
+                              BG_REG_32x32);
+}
+
+void close_renderer(void) {
+    hide_sprite(CURSOR_SPRITE_INDEX);
 }
 
 void reset_board_render(void) {

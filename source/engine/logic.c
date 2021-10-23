@@ -34,7 +34,7 @@ static void cursor_update(void) {
     set_cursor_position(g_cursor_x << 3, g_cursor_y << 3);
 }
 
-void update(void) {
+void game_update(void) {
     cursor_update();
 
     if (key_positive_edge(KEY_A) && can_reveal_square(g_cursor_x, g_cursor_y))
