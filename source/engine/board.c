@@ -41,6 +41,9 @@ void setup_board(void) {
     memset(&g_board, 0, BOARD_SIZE);
 
     for (int i = 0; i < g_bomb_number; i++) {
+        random();
+        random();
+        random();
         bool bomb_planted = false;
         while (!bomb_planted) {
             int x = ((unsigned) random()) % g_game_board_side;
