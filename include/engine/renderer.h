@@ -13,6 +13,7 @@
 #define CURSOR_SPRITE_INDEX 0
 
 void init_renderer(void);
+void reset_renderer(void);
 void close_renderer(void);
 
 /**

@@ -12,7 +12,16 @@ void init_game(void) {
     init_renderer();
 }
 
-static void cursor_update(void) {
+void restart_game(void) {
+    setup_board();
+    reset_renderer();
+}
+
+void close_game(void) {
+    close_renderer();
+}
+
+static inline void cursor_update(void) {
     if (key_positive_edge(KEY_UP)) {
         if (g_cursor_y > 0)
             g_cursor_y--;
@@ -42,4 +51,7 @@ void game_update(void) {
 
     else if (key_positive_edge(KEY_B))
         toggle_flag_square(g_cursor_x, g_cursor_y);
+
+    else if (key_positive_edge(KEY_START))
+        restart_game();
 }

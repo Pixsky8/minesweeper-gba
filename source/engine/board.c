@@ -15,7 +15,7 @@ static inline enum BOARD_TYPE get_square(int x, int y) {
     return matrix_char_get(g_board, x, y, g_game_board_side);
 }
 
-void plant_bomb(int x, int y) {
+static inline void plant_bomb(int x, int y) {
     matrix_char_set(g_board, x, y, g_game_board_side, BOMB);
 
     for (int curr_x = -1; curr_x <= 1; curr_x++) {
@@ -39,11 +39,6 @@ void plant_bomb(int x, int y) {
 
 void setup_board(void) {
     memset(&g_board, 0, BOARD_SIZE);
-
-    random();
-    random();
-    random();
-    random();
 
     for (int i = 0; i < g_bomb_number; i++) {
         bool bomb_planted = false;

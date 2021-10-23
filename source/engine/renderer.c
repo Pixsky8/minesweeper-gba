@@ -55,12 +55,14 @@ void init_renderer(void) {
                               BG_REG_32x32);
 }
 
-void close_renderer(void) {
-    hide_sprite(CURSOR_SPRITE_INDEX);
+void reset_renderer(void) {
+    short_memset(&SE_MEM[SCREEN_BASE_BLOCK][0], 1, 1024);
+    // Remove every info sprites
+    short_memset(&SE_MEM[SCREEN_INFO_BLOCK][0], 0, 1024);
 }
 
-void reset_board_render(void) {
-    short_memset(&SE_MEM[SCREEN_BASE_BLOCK][0], 1, 1024);
+void close_renderer(void) {
+    hide_sprite(CURSOR_SPRITE_INDEX);
 }
 
 void display_square(int x, int y, enum BOARD_TYPE new_type) {
