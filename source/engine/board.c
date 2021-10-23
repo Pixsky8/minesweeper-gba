@@ -46,10 +46,17 @@ void setup_board(void) {
     random();
 
     for (int i = 0; i < g_bomb_number; i++) {
-        int x = ((unsigned) random()) % g_game_board_side;
-        int y = ((unsigned) random()) % g_game_board_side;
+        bool bomb_planted = false;
+        while (!bomb_planted) {
+            int x = ((unsigned) random()) % g_game_board_side;
+            int y = ((unsigned) random()) % g_game_board_side;
 
-        plant_bomb(x, y);
+            if (get_square(x, y) == BOMB)
+                continue;
+
+            plant_bomb(x, y);
+            bomb_planted = true;
+        }
     }
 }
 
