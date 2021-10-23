@@ -1,5 +1,3 @@
-#include <stdbool.h>
-
 #include "platform/input.h"
 #include "platform/types.h"
 
@@ -19,6 +17,13 @@ void restart_game(void) {
 
 void close_game(void) {
     close_renderer();
+}
+
+static inline void reveal_all_squares(void) {
+    for (int i = 0; i < g_game_board_side; i++) {
+        for (int j = 0; j < g_game_board_side; j++)
+            reveal_square(i, j);
+    }
 }
 
 static inline void cursor_update(void) {
@@ -54,4 +59,7 @@ void game_update(void) {
 
     else if (key_positive_edge(KEY_START))
         restart_game();
+
+    else if (key_positive_edge(KEY_SELECT))
+        reveal_all_squares();
 }
